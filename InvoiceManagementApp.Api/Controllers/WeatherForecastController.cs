@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,8 @@ namespace InvoiceManagementApp.Api.Controllers
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
+            HttpContext.Request.Headers.TryGetValue("Authorization", out var authorizationToken);
+            _logger.LogInformation("token:", string.Join("/n", authorizationToken));
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
