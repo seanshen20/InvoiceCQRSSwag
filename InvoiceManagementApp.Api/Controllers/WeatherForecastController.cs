@@ -31,7 +31,7 @@ namespace InvoiceManagementApp.Api.Controllers
         {
             var rng = new Random();
             HttpContext.Request.Headers.TryGetValue("Authorization", out var authorizationToken);
-            _logger.LogInformation("token:", string.Join("/n", authorizationToken));
+            _logger.LogInformation($"token: {string.Join("/n", authorizationToken.Select(i => i.ToString()))}");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
